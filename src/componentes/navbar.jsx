@@ -9,14 +9,13 @@ export default class Navbar extends React.Component {
     return (
       <Router>
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-          <Link to={'/'} className="navbar-brand">React JS</Link>
           <div className="navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav mr-auto">
               <li className="nav-item">
                 <Link to={'/lista'} className="nav-link">Lista</Link>
               </li>
               <li className="nav-item">
-                <Link to={'/crud'} className="nav-link">CRUD</Link>
+                <Link to={'/'} className="nav-link">CRUD</Link>
               </li>
             </ul>
           </div>
@@ -24,7 +23,8 @@ export default class Navbar extends React.Component {
         <br></br>
         <Switch>
           <Route path='/lista' component={ListaApp} />
-          <Route path='/crud' component={Main} />
+          <Route path='/' component={Main} />
+          <Route path='/nav' component={Navbar} />
         </Switch>
       </Router>
     );

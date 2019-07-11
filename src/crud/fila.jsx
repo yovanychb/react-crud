@@ -6,7 +6,7 @@ export default class Fila extends React.Component {
     constructor(props) {
         super(props);
         this.delete = this.delete.bind(this);
-        this.gwtById = this.getById.bind(this);
+        this.getById = this.getById.bind(this);
     }
 
     getById() {
@@ -45,7 +45,7 @@ export default class Fila extends React.Component {
                     {this.props.user.apellido}
                 </td>
                 <td>
-                    <button onClick={this.select} className="btn btn-primary">Editar</button>
+                    <button onClick={this.getById} className="btn btn-primary">Editar</button>
                     <span> </span>
                     <button onClick={this.delete} className="btn btn-danger">Delete</button>
                 </td>
