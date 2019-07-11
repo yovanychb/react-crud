@@ -6,10 +6,10 @@ export default class Fila extends React.Component {
     constructor(props) {
         super(props);
         this.delete = this.delete.bind(this);
-        this.select = this.select.bind(this);
+        this.gwtById = this.getById.bind(this);
     }
 
-    select() {
+    getById() {
         axios.get('http://localhost/codeigniter_api/api/usuariosrest?id=' + this.props.user.id_usuarios)
             .then(response => {
                 this.props.cargar({
