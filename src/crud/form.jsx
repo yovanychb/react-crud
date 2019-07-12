@@ -53,7 +53,7 @@ export default class Form extends React.Component {
     render() {
         const editar = (this.props.editar ? true : false);
         return (
-            <div style={{ marginTop: 10 }}>
+            <div className="col-4">
                 <h3 align="center">{!editar ? "Agregar Nuevo Usuario" : "Editar Usuario"}</h3>
                 <form onSubmit={(!editar ? this.create : this.update)}>
 
