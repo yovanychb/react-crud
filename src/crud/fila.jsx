@@ -47,7 +47,7 @@ export default class Fila extends React.Component {
                 <td>
                     <button onClick={this.getById} className="btn btn-primary">Editar</button>
                     <span> </span>
-                    <button onClick={this.delete} className="btn btn-danger">Delete</button>
+                    <button onClick={this.delete} className="btn btn-danger">Eliminar</button>
                 </td>
             </tr>
         );

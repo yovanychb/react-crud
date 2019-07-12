@@ -33,7 +33,8 @@ export default class Form extends React.Component {
             apellido: this.props.apellido
         };
         axios.post('http://localhost/codeigniter_api/api/usuariosrest', user)
-            .then(response => this.props.load(response.data));
+            .then(response => this.props.load(response.data)).catch(err => console.log(err));
+            
     }
 
     update(e) {
