@@ -12,10 +12,10 @@ export default class Navbar extends React.Component {
           <div className="navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav mr-auto">
               <li className="nav-item">
-                <Link to={'/lista'} className="nav-link">Lista</Link>
+                <Link to={'/'} className="nav-link">CRUD</Link>
               </li>
               <li className="nav-item">
-                <Link to={'/'} className="nav-link">CRUD</Link>
+                <Link to={'/lista'} className="nav-link">Lista</Link>
               </li>
             </ul>
           </div>

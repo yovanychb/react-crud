@@ -20,6 +20,7 @@ export default class Tabla extends React.Component {
     render() {
         return (
             <div className="col-7">
+                <h3>Lista de Usuarios</h3>
                 <table className="table table-striped" style={{ marginTop: 20 }}>
                     <thead>
                         <tr>
