@@ -15,40 +15,29 @@ export default class Fila extends React.Component {
                 this.props.cargar({
                     id_usuarios: response.data.id_usuarios,
                     nombre: response.data.nombre,
-                    apellido: response.data.apellido,
-                    editar: true
+                    apellido: response.data.apellido
                 });
-            })
-            .catch(function (error) {
-                console.log(error);
-            })
+            }).catch(error => console.log(error))
     }
 
     delete() {
-        axios.delete('http://localhost/codeigniter_api/api/usuariosrest', { data: { id_usuarios: this.props.user.id_usuarios } })
-            .then(response => this.props.load(response.data))
-            .catch(err => console.log(err));
-
-
+        const conf = {
+            data: { id_usuarios: this.props.user.id_usuarios }
+        }
+        axios.delete('http://localhost/codeigniter_api/api/usuariosrest', conf)
+            .then(response => this.props.refresh(response.data))
+            .catch(error => console.log(error));
     }
 
     render() {
         return (
             <tr>
-                <td>
-                    {this.props.user.id_usuarios}
-                </td>
-                <td>
-                    {this.props.user.nombre}
-                </td>
-                <td>
-                    {this.props.user.apellido}
-                </td>
-                <td>
-                    <button onClick={this.getById} className="btn btn-primary">Editar</button>
-                    <span> </span>
-                    <button onClick={this.delete} className="btn btn-danger">Eliminar</button>
-                </td>
+                <td>{this.props.user.id_usuarios}</td>
+                <td>{this.props.user.nombre}</td>
+                <td>{this.props.user.apellido}</td>
+                <td><button onClick={this.getById} className="btn btn-primary">Editar</button>
+                <span> </span>
+                <button onClick={this.delete} className="btn btn-danger">Eliminar</button></td>
             </tr>
         );
     }

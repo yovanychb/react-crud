@@ -1,11 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 import Tabla from './tabla';
-import '../../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import Form from './form';
 
 export default class Main extends React.Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -17,9 +15,18 @@ export default class Main extends React.Component {
         };
         this.onNombreChange = this.onNombreChange.bind(this);
         this.onApellidoChange = this.onApellidoChange.bind(this);
-        this.load = this.load.bind(this);
+        this.refresh = this.refresh.bind(this);
         this.cargar = this.cargar.bind(this);
         this.clear = this.clear.bind(this);
+    }
+
+    cargar(user){
+        this.setState({
+            id_usuarios: user.id_usuarios,
+            nombre: user.nombre,
+            apellido: user.apellido,
+            editar: true
+        });
     }
 
     onNombreChange(nombre) {
@@ -30,16 +37,22 @@ export default class Main extends React.Component {
         this.setState({ apellido: apellido });
     }
 
-    load(datos) {
+    componentDidMount() {
+        axios.get('http://localhost/codeigniter_api/api/usuariosrest')
+            .then(response => this.setState({ usuarios: response.data }))
+            .catch(function (error) {
+                console.log(error);
+            })
+    }
+
+    refresh(datos) {
+        this.clear();
         this.setState({
             usuarios: datos,
-            id_usuario: '',
-            nombre: '',
-            apellido: '',
-            editar: false
         });
 
     }
+
     clear() {
         this.setState({
             id_usuario: '',
@@ -49,44 +62,20 @@ export default class Main extends React.Component {
         });
     }
 
-    cargar(user) {
-        this.setState({
-            id_usuarios: user.id_usuarios,
-            nombre: user.nombre,
-            apellido: user.apellido,
-            editar: user.editar
-        })
-    }
-
-    componentDidMount() {
-        axios.get('http://localhost/codeigniter_api/api/usuariosrest')
-            .then(response => {
-                this.setState({ usuarios: response.data });
-            })
-            .catch(function (error) {
-                console.log(error);
-            })
-    }
-
     render() {
         return (
             <div className="container">
                 <div className="row">
-                    <div className="col-4">
-                        <Form onNombreChange={this.onNombreChange}
-                            onApellidoChange={this.onApellidoChange}
-                            load={this.load}
-                            id_usuarios={this.state.id_usuarios}
-                            nombre={this.state.nombre}
-                            apellido={this.state.apellido}
-                            editar={this.state.editar}
-                            clear={this.clear}
-                        />
-                    </div>
-                    <div className="col-7">
-                        <h3 align="center">Lista de usuarios</h3>
-                        <Tabla usuarios={this.state.usuarios} cargar={this.cargar} load={this.load} />
-                    </div>
+                    <Form onNombreChange={this.onNombreChange}
+                        onApellidoChange={this.onApellidoChange}
+                        nombre={this.state.nombre}
+                        apellido={this.state.apellido}
+                        refresh={this.refresh}
+                        id_usuarios={this.state.id_usuarios}
+                        editar={this.state.editar}
+                        clear={this.clear}
+                    />
+                    <Tabla usuarios={this.state.usuarios} refresh={this.refresh} cargar={this.cargar}/>
                 </div>
             </div>
         );
